@@ -1,0 +1,13 @@
+{
+  "name": "zemvirt-siargao",
+  "version": "1.0.0",
+  "description": "Mobile-first Siargao stay booking app with Pi Network payment flow.",
+  "main": "server.example.js",
+  "scripts": {
+    "start": "node server.example.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "private": true
+}

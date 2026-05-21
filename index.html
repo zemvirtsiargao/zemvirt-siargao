@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zemvirt Siargao</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://sdk.minepi.com/pi-sdk.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <button class="icon-button" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div>
+          <p class="eyebrow">Book stays in Siargao</p>
+          <h1>Zemvirt</h1>
+        </div>
+        <button class="pi-connect" id="piConnect" type="button">Connect Pi</button>
+      </header>
+
+      <section class="hero" aria-label="Siargao booking search">
+        <div class="hero-copy">
+          <p>Island stays, surf breaks, and quiet villas.</p>
+          <strong>Find a room for tonight or plan the whole trip.</strong>
+        </div>
+        <form class="search-card" id="searchForm">
+          <label>
+            <span>Area</span>
+            <select id="areaFilter">
+              <option value="all">Anywhere in Siargao</option>
+              <option value="General Luna">General Luna</option>
+              <option value="Cloud 9">Cloud 9</option>
+              <option value="Dapa">Dapa</option>
+              <option value="Pacifico">Pacifico</option>
+            </select>
+          </label>
+          <div class="date-grid">
+            <label>
+              <span>Check in</span>
+              <input id="checkIn" type="date" required />
+            </label>
+            <label>
+              <span>Check out</span>
+              <input id="checkOut" type="date" required />
+            </label>
+          </div>
+          <div class="date-grid">
+            <label>
+              <span>Guests</span>
+              <input id="guestCount" type="number" min="1" max="12" value="2" />
+            </label>
+            <label>
+              <span>Budget</span>
+              <select id="budgetFilter">
+                <option value="all">Any budget</option>
+                <option value="3000">Under PHP 3,000</option>
+                <option value="6000">Under PHP 6,000</option>
+                <option value="10000">Under PHP 10,000</option>
+              </select>
+            </label>
+          </div>
+          <button class="primary-button" type="submit">Search stays</button>
+        </form>
+      </section>
+
+      <section class="quick-filters" aria-label="Popular stay types">
+        <button class="chip is-active" data-type="all">All</button>
+        <button class="chip" data-type="Beachfront">Beachfront</button>
+        <button class="chip" data-type="Surf">Surf</button>
+        <button class="chip" data-type="Private Villa">Villa</button>
+        <button class="chip" data-type="Budget">Budget</button>
+      </section>
+
+      <section class="section-heading">
+        <div>
+          <p class="eyebrow">Available stays</p>
+          <h2 id="resultCount">6 stays found</h2>
+        </div>
+        <button class="text-button" id="resetFilters">Reset</button>
+      </section>
+
+      <section class="stay-list" id="stayList" aria-live="polite"></section>
+
+      <nav class="bottom-nav" aria-label="Main navigation">
+        <button class="active">Explore</button>
+        <button>Trips</button>
+        <button>Saved</button>
+        <button>Inbox</button>
+      </nav>
+    </main>
+
+    <section class="booking-sheet" id="bookingSheet" aria-hidden="true">
+      <div class="sheet-backdrop" data-close-sheet></div>
+      <article class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+        <button class="sheet-close" data-close-sheet aria-label="Close booking details">x</button>
+        <img id="sheetImage" alt="" />
+        <div class="sheet-content">
+          <p class="eyebrow" id="sheetArea"></p>
+          <h2 id="sheetTitle"></h2>
+          <p class="muted" id="sheetDescription"></p>
+          <div class="amenities" id="sheetAmenities"></div>
+          <dl class="price-box">
+            <div>
+              <dt>Nightly rate</dt>
+              <dd id="sheetRate"></dd>
+            </div>
+            <div>
+              <dt>Nights</dt>
+              <dd id="sheetNights"></dd>
+            </div>
+            <div>
+              <dt>Service fee</dt>
+              <dd id="sheetFee"></dd>
+            </div>
+            <div class="total">
+              <dt>Total</dt>
+              <dd id="sheetTotal"></dd>
+            </div>
+          </dl>
+          <button class="primary-button" id="confirmBooking">Reserve this stay</button>
+          <p class="confirmation" id="confirmationText" hidden></p>
+        </div>
+      </article>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
