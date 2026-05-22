@@ -240,24 +240,32 @@ async function connectPiAccount() {
 }
 
 async function approvePiPayment(paymentId) {
+  showPaymentMessage(`Approving Pi payment ${paymentId}...`, false);
   const response = await fetch("/api/pi/payments/approve", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ paymentId }),
   });
 
-  if (!response.ok) throw new Error("Payment approval failed");
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || "Payment approval failed");
+  }
   return response.json();
 }
 
 async function completePiPayment(paymentId, txid) {
+  showPaymentMessage(`Completing Pi payment ${paymentId}...`, false);
   const response = await fetch("/api/pi/payments/complete", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ paymentId, txid }),
   });
 
-  if (!response.ok) throw new Error("Payment completion failed");
+  if (!response.ok) {
+    const data = await response.json().catch(() => ({}));
+    throw new Error(data.error || "Payment completion failed");
+  }
   return response.json();
 }
 
